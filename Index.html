@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhistarBot - WhatsApp Session Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fab fa-whatsapp"></i>
+                <h1>PhistarBot</h1>
+            </div>
+            <p>Session Generator</p>
+        </header>
+
+        <main>
+            <div class="card" id="step1">
+                <h2>Generate WhatsApp Session</h2>
+                <p>Enter your WhatsApp number to begin pairing</p>
+                
+                <div class="input-group">
+                    <label for="phone">WhatsApp Number</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="phone" placeholder="e.g. 2349128019141" pattern="[0-9]+">
+                        <span class="country-code">+</span>
+                    </div>
+                    <small>Include country code without + or 0</small>
+                </div>
+
+                <button id="generateBtn" class="btn-primary">
+                    <span>Generate Pairing Code</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="card hidden" id="step2">
+                <h2>Pairing Code</h2>
+                <p>Enter this code in your WhatsApp to link your account</p>
+                
+                <div class="code-display">
+                    <div id="pairingCode" class="code">XXXX-XXXX</div>
+                    <button id="copyCodeBtn" class="btn-secondary">
+                        <i class="far fa-copy"></i> Copy
+                    </button>
+                </div>
+
+                <div class="instructions">
+                    <h3>How to pair:</h3>
+                    <ol>
+                        <li>Open WhatsApp on your phone</li>
+                        <li>Go to Settings → Linked Devices</li>
+                        <li>Tap on "Link a Device"</li>
+                        <li>Enter the code above when prompted</li>
+                    </ol>
+                </div>
+
+                <div class="timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="countdown">Code expires in 05:00</span>
+                </div>
+            </div>
+
+            <div class="card hidden" id="step3">
+                <div class="success-message">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Session Successfully Created!</h2>
+                    <p>Your WhatsApp session is now ready to use with PhistarBot</p>
+                    
+                    <div class="session-id-container">
+                        <label>Your Session ID:</label>
+                        <div class="session-id-wrapper">
+                            <code id="sessionId">session_abc123xyz456</code>
+                            <button id="copySessionBtn" class="btn-secondary">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="env-instructions">
+                        <h3>How to use this session:</h3>
+                        <p>Add this to your <code>.env</code> file:</p>
+                        <pre id="envContent">WHATSAPP_SESSION_ID=session_abc123xyz456</pre>
+                        <button id="copyEnvBtn" class="btn-secondary">
+                            <i class="far fa-copy"></i> Copy .env Content
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2023 PhistarBot. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+  </html>
