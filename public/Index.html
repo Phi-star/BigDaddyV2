@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhistarBot - WhatsApp Session Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="container">
@@ -14,7 +15,7 @@
                 <i class="fab fa-whatsapp"></i>
                 <h1>PhistarBot</h1>
             </div>
-            <p>Session Generator</p>
+            <p>Professional WhatsApp Session Generator</p>
         </header>
 
         <main>
@@ -25,7 +26,7 @@
                 <div class="input-group">
                     <label for="phone">WhatsApp Number</label>
                     <div class="input-wrapper">
-                        <input type="text" id="phone" placeholder="e.g. 2349128019141" pattern="[0-9]+">
+                        <input type="text" id="phone" placeholder="e.g. 2349128019141" pattern="[0-9]+" required>
                         <span class="country-code">+</span>
                     </div>
                     <small>Include country code without + or 0</small>
@@ -35,6 +36,8 @@
                     <span>Generate Pairing Code</span>
                     <i class="fas fa-arrow-right"></i>
                 </button>
+                
+                <div id="errorMessage" class="error-message hidden"></div>
             </div>
 
             <div class="card hidden" id="step2">
@@ -46,6 +49,13 @@
                     <button id="copyCodeBtn" class="btn-secondary">
                         <i class="far fa-copy"></i> Copy
                     </button>
+                </div>
+
+                <div class="connection-status">
+                    <div class="status-indicator connecting">
+                        <div class="spinner"></div>
+                        <span>Waiting for connection...</span>
+                    </div>
                 </div>
 
                 <div class="instructions">
@@ -90,15 +100,54 @@
                             <i class="far fa-copy"></i> Copy .env Content
                         </button>
                     </div>
+
+                    <div class="deploy-instructions">
+                        <h3>Deployment Instructions:</h3>
+                        <div class="platform-tabs">
+                            <button class="tab-btn active" data-platform="render">Render</button>
+                            <button class="tab-btn" data-platform="railway">Railway</button>
+                            <button class="tab-btn" data-platform="other">Others</button>
+                        </div>
+                        <div class="platform-content active" id="render-instructions">
+                            <ol>
+                                <li>Create a new Web Service on Render</li>
+                                <li>Add your environment variables</li>
+                                <li>Set build command: <code>npm install && npm run build</code></li>
+                                <li>Set start command: <code>node server.js</code></li>
+                            </ol>
+                        </div>
+                        <div class="platform-content" id="railway-instructions">
+                            <ol>
+                                <li>Create a new project on Railway</li>
+                                <li>Add your environment variables</li>
+                                <li>Connect your GitHub repository</li>
+                                <li>Deploy automatically</li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
 
         <footer>
-            <p>© 2023 PhistarBot. All rights reserved.</p>
+            <p>© <span id="currentYear"></span> PhistarBot. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="https://github.com/yourusername/phistar-bot" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Socket.IO Client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
 </body>
-  </html>
+</html>
