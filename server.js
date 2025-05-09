@@ -1,7 +1,8 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Boom } from '@hapi/boom';
-import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore } from '@adiwajshing/baileys';
+import pkg from '@adiwajshing/baileys';
+const { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore } = pkg;
 import pino from 'pino';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -27,7 +28,7 @@ const io = new Server(server, {
 
 // Middleware
 app.use(helmet());
-app.use(cors()); // Removed ALLOWED_ORIGINS environment variable
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -123,8 +124,8 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-// Start server with hardcoded port
-const PORT = 3000; // Removed process.env.PORT
+// Start server
+const PORT = 3000;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
